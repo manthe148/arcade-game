@@ -28,14 +28,20 @@ Enemy.prototype.update = function(dt) {
         this.randomSpeed()
     }
 
-         if (player.x  < this.x + 10&&
-        player.x  > this.x -10 &&
-        player.y  < this.y +10 &&
-        player.y  > this.y - 10) {
-        console.log('hit')
-        player.x = 200;
-        player.y = 385;
-    }
+    //      if (player.x  < this.x + 10&&
+    //     player.x  > this.x -10 &&
+    //     player.y  < this.y +10 &&
+    //     player.y  > this.y - 10) {
+    //     console.log('hit')
+    //     player.x = 200;
+    //     player.y = 385;
+    // }
+    if ( ( player.x < Number(this.x) + 50 && player.x > Number(this.x) - 50 ) &&
+             ( player.y < Number(this.y) + 50 && player.y > Number(this.y) - 50 )) {
+                console.log('hit')
+                player.x = 200;
+                player.y = 385;
+        }
 
 };
 
