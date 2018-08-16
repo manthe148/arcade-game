@@ -27,9 +27,25 @@ Enemy.prototype.update = function(dt) {
     } else {
         this.randomSpeed()
     }
+
+         if (player.x  < this.x + 10&&
+        player.x  > this.x -10 &&
+        player.y  < this.y +10 &&
+        player.y  > this.y - 10) {
+        console.log('hit')
+        player.x = 200;
+        player.y = 385;
+    }
+
 };
 
-
+Enemy.prototype.randomSpot = function(){
+    function randomEnemy(bottom, middle, top){
+        return Math.floor(Math.random() * (bottom + middle + top + 3) + bottom)
+        this.y = 3
+        this.change = randomEnemy(3,6)
+    }
+}
 
 Enemy.prototype.randomSpeed = function(){
     function randomInterval(min,max)
@@ -37,7 +53,7 @@ Enemy.prototype.randomSpeed = function(){
         return Math.floor(Math.random()*(max-min+1)+min);
     }
     this.x = 1;
-    this.speed = randomInterval(1,10);
+    this.speed = randomInterval(1,5);
     console.log('randomSpeed' + this.speed);
 }
 
@@ -57,7 +73,7 @@ var Player = function(x, y){
 
 Player.prototype.update = function(){
     player.playerReset();
-    this.collision();
+    // this.collision();
 }
 Player.prototype.playerReset = function(){
     if (this.y < 20 && this.x < 20){
@@ -66,26 +82,26 @@ Player.prototype.playerReset = function(){
     }
 }
 
-Player.prototype.collision = function(enemyChar){
-    var playerChar = {
-        x: player.x,
-        y: player.y,
-        width:10    ,
-        height:50
-    }
-    var enemyChar = {
-        x: allEnemies.x,
-        y: allEnemies.y,
-        width:10,
-        height:50
-    }
-    if ((playerChar.x > enemyChar - 75 && playerChar.x < enemyChar.x + 75) &&
-        (playerChar.y > enemyChar.y - 75 && playerChar.y < enemyChar.y + 75)) {
-        console.log('hit')
-        this.x = 200;
-        this.y = 385;
-}
-}
+// Player.prototype.collision = function(){
+//     var playerChar = {
+//         x: player.x,
+//         y: player.y,
+//         width:10    ,
+//         height:50
+//     }
+//     var enemyChar = {
+//         x: allEnemies.x,
+//         y: allEnemies.y,
+//         width:10,
+//         height:50
+//     }
+//     if ((enemyChar.x > playerChar.x - 75 && enemyChar.x < playerChar.x + 75) &&
+//         (enemyChar.y > playerChar.y - 75 && enemyChar.y < playerChar.y + 75)) {
+//         console.log('hit')
+//         this.x = 200;
+//         this.y = 385;
+// }
+// }
 Player.prototype.render = function(){
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
@@ -112,12 +128,12 @@ Player.prototype.handleInput = function(keys){
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
- enemy = new Enemy(100, 50);//220
- enemy2 = new Enemy(-500,130);//130
- enemy3 = new Enemy(-500,220);//50
+ enemy = new Enemy(0,50);//220
+ enemy2 = new Enemy(0,130);//130
+ enemy3 = new Enemy(0,220);//50
 
 
-var allEnemies = [enemy, enemy2, enemy3]
+var allEnemies = [enemy,enemy2,enemy3];
 
 var player = new Player(200,385);
 
