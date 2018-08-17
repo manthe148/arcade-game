@@ -27,15 +27,13 @@ Enemy.prototype.update = function(dt) {
     } else {
         this.randomSpeed()
     }
-
-// THIS IS TO CHECK FOR Collision 
+// this finds out if the enemy and the play hit each other
     if ( ( player.x < Number(this.x) + 50 && player.x > Number(this.x) - 50 ) &&
              ( player.y < Number(this.y) + 50 && player.y > Number(this.y) - 50 )) {
                 console.log('hit')
                 player.x = 200;
                 player.y = 385;
         }
-// THIS IS TO MAKE BARRIRES TO PREVENT THE PLAYER TO LEAVE GAME AREA
     if (player.y > 383) {
         player.y = 385
     }
@@ -45,10 +43,17 @@ Enemy.prototype.update = function(dt) {
     if (player.x < 0) {
         player.x = 0
     }
+
+    if (player.y <= -35){
+        player.y = -35
+        console.log('you win!')
+    }
+
+
 };
 
 
-//RANDOM SPEED
+
 Enemy.prototype.randomSpeed = function(){
     function randomInterval(min,max)
     {
