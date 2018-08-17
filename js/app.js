@@ -28,31 +28,27 @@ Enemy.prototype.update = function(dt) {
         this.randomSpeed()
     }
 
-    //      if (player.x  < this.x + 10&&
-    //     player.x  > this.x -10 &&
-    //     player.y  < this.y +10 &&
-    //     player.y  > this.y - 10) {
-    //     console.log('hit')
-    //     player.x = 200;
-    //     player.y = 385;
-    // }
+// THIS IS TO CHECK FOR Collision 
     if ( ( player.x < Number(this.x) + 50 && player.x > Number(this.x) - 50 ) &&
              ( player.y < Number(this.y) + 50 && player.y > Number(this.y) - 50 )) {
                 console.log('hit')
                 player.x = 200;
                 player.y = 385;
         }
-
+// THIS IS TO MAKE BARRIRES TO PREVENT THE PLAYER TO LEAVE GAME AREA
+    if (player.y > 383) {
+        player.y = 385
+    }
+    if (player.x > 400) {
+        player.x = 400
+    }
+    if (player.x < 0) {
+        player.x = 0
+    }
 };
 
-Enemy.prototype.randomSpot = function(){
-    function randomEnemy(bottom, middle, top){
-        return Math.floor(Math.random() * (bottom + middle + top + 3) + bottom)
-        this.y = 3
-        this.change = randomEnemy(3,6)
-    }
-}
 
+//RANDOM SPEED
 Enemy.prototype.randomSpeed = function(){
     function randomInterval(min,max)
     {
@@ -79,35 +75,16 @@ var Player = function(x, y){
 
 Player.prototype.update = function(){
     player.playerReset();
-    // this.collision();
+    
 }
 Player.prototype.playerReset = function(){
-    if (this.y < 20 && this.x < 20){
+    if (this.y < 50 && this.x < 50){
         this.x = 200
         this.y = 385
     }
 }
 
-// Player.prototype.collision = function(){
-//     var playerChar = {
-//         x: player.x,
-//         y: player.y,
-//         width:10    ,
-//         height:50
-//     }
-//     var enemyChar = {
-//         x: allEnemies.x,
-//         y: allEnemies.y,
-//         width:10,
-//         height:50
-//     }
-//     if ((enemyChar.x > playerChar.x - 75 && enemyChar.x < playerChar.x + 75) &&
-//         (enemyChar.y > playerChar.y - 75 && enemyChar.y < playerChar.y + 75)) {
-//         console.log('hit')
-//         this.x = 200;
-//         this.y = 385;
-// }
-// }
+
 Player.prototype.render = function(){
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
