@@ -1,6 +1,6 @@
 // Enemies our player must avoid
 
-var Enemy = function(x, y) {
+var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
@@ -9,7 +9,7 @@ var Enemy = function(x, y) {
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
-
+    this.speed = speed;
 
 };
 
@@ -21,33 +21,21 @@ Enemy.prototype.update = function(dt) {
     // all computers.
 
     var x = parseInt(this.x)
-    if(x < 600){
+    if(x < 609){
         x += this.speed
         this.x = x.toString()
     } else {
         this.randomSpeed()
     }
 // this finds out if the enemy and the play hit each other
-    if ( ( player.x < Number(this.x) + 50 && player.x > Number(this.x) - 50 ) &&
-             ( player.y < Number(this.y) + 50 && player.y > Number(this.y) - 50 )) {
+    if ( ( player.x < Number(this.x) + 75 && player.x > Number(this.x) - 75 ) &&
+             ( player.y < Number(this.y) + 75 && player.y > Number(this.y) - 75 )) {
                 console.log('hit')
+            //debugger;
                 player.x = 200;
                 player.y = 385;
         }
-    if (player.y > 383) {
-        player.y = 385
-    }
-    if (player.x > 400) {
-        player.x = 400
-    }
-    if (player.x < 0) {
-        player.x = 0
-    }
 
-    if (player.y <= -35){
-        player.y = -35
-        console.log('you win!')
-    }
 
 
 };
@@ -60,7 +48,7 @@ Enemy.prototype.randomSpeed = function(){
         return Math.floor(Math.random()*(max-min+1)+min);
     }
     this.x = 1;
-    this.speed = randomInterval(1,5);
+    this.speed = randomInterval(3, 10);
     console.log('randomSpeed' + this.speed);
 }
 
@@ -76,14 +64,30 @@ var Player = function(x, y){
     this.sprite = 'images/char-boy.png';
     this.x = x;
     this.y = y;
+
+
 }
 
 Player.prototype.update = function(){
+    let wins = []
     player.playerReset();
+    if (player.y > 383) {
+        player.y = 385
+    }
+    if (player.x > 400) {
+        player.x = 400
+    }
+    if (player.x < 0) {
+        player.x = 0
+    }else  if (player.y <= -35){
+        player.y = -35
+        return alert('blah');
+        
+    }
     
 }
 Player.prototype.playerReset = function(){
-    if (this.y < 50 && this.x < 50){
+    if (this.y < 20 && this.x < 20){
         this.x = 200
         this.y = 385
     }
@@ -116,12 +120,13 @@ Player.prototype.handleInput = function(keys){
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
- enemy = new Enemy(0,50);//220
- enemy2 = new Enemy(0,130);//130
- enemy3 = new Enemy(0,220);//50
+ 
 
-
-var allEnemies = [enemy,enemy2,enemy3];
+var allEnemies = [
+    enemy = new Enemy(0,50),
+    enemy2 = new Enemy(0,130),
+    enemy3 = new Enemy(0,220)
+];
 
 var player = new Player(200,385);
 
