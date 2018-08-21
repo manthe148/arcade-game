@@ -48,7 +48,7 @@ Enemy.prototype.randomSpeed = function(){
         return Math.floor(Math.random()*(max-min+1)+min);
     }
     this.x = 1;
-    this.speed = randomInterval(3, 10);
+    this.speed = randomInterval(3, 1);
     console.log('randomSpeed' + this.speed);
 }
 
@@ -79,13 +79,20 @@ Player.prototype.update = function(){
     }
     if (player.x < 0) {
         player.x = 0
-    }else  if (player.y <= -35){
-        player.y = -35
-        return alert('blah');
+    }
+    if (player.y <= -37){
+        player.y = -37
+        
+        player.y = 385
+        player.x = 200 
+        //debugger;  
+        //console.log('you win')
+        alert('you win!')
+    }
         
     }
     
-}
+
 Player.prototype.playerReset = function(){
     if (this.y < 20 && this.x < 20){
         this.x = 200
