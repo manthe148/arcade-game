@@ -48,7 +48,7 @@ Enemy.prototype.randomSpeed = function(){
         return Math.floor(Math.random()*(max-min+1)+min);
     }
     this.x = 1;
-    this.speed = randomInterval(3, 1);
+    this.speed = randomInterval(3, 10);
     console.log('randomSpeed' + this.speed);
 }
 
